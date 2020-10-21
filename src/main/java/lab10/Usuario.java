@@ -1,8 +1,60 @@
 package lab10;
 
-public class Usuario {
-    String hash,sexo,primerNombre;
-    Long codigo;
-    Integer vigencia;
+import java.util.Date;
 
+public class Usuario {
+    String hash, primerNombre, apellidoPaterno, apellidoMaterno, email, nombre, passwd, segundoNombre, dni, nombreCompleto;
+    Long codigo;
+    Integer sexo, vigencia;
+    Date fechaCese;
+
+    public Usuario(String email, String dni, Long codigo) {
+        this.email = email;
+        this.dni = dni;
+        this.codigo = codigo;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public void setPrimerNombre(String primerNombre) {
+        this.primerNombre = primerNombre;
+    }
+
+    public void setSegundoNombre(String segundoNombre) {
+        this.segundoNombre = segundoNombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public void setSexo(Integer sexo) {
+        this.sexo = sexo;
+    }
+
+    public void setVigencia(Integer vigencia) {
+        this.vigencia = vigencia;
+    }
+
+    public void setFechaCese(Date fechaCese) {
+        this.fechaCese = fechaCese;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
 }
