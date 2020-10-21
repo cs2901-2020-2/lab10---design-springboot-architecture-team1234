@@ -1,5 +1,5 @@
 package lab10;
 
-public class UsuarioRepository {
+public interface UsuarioRepository implements CrudRepository {
 
 }
