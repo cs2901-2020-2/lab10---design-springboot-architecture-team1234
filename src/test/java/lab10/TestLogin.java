@@ -77,10 +77,21 @@ public class TestLogin {
         Assert.assertEquals(usuarios.size(), 2);
 
         // Test buscarUsuario
+        Usuario usuarioBSS1 = usuarioService.buscarUsuario("email0@gmail.com","password_usuario1");
+        Assert.assertEquals(usuario1.nombre, usuarioBSS1.nombre);
+        Assert.assertEquals(usuario1.hash, usuarioBSS1.hash);
 
         // Test findOneByEmail
+        Usuario usuarioBE1 = usuarioService.findOneByEmail("email20@gmail.com");
+        Assert.assertEquals(usuario2.nombre, usuarioBE1.nombre);
+        Assert.assertEquals(usuario2.hash, usuarioBE1.hash);
+        Assert.assertEquals(usuario2.email, usuarioBE1.email);
 
+        usuarioService.delete(usuario1.codigo);
+        usuarioService.delete(usuario2.codigo);
 
+        List<Usuario> usuariosFinal = usuarioService.findAll();
+        Assert.assertEquals(usuarios.size(), 0);
     }
 
     private void test_update(Usuario usuario1, UsuarioService usuarioService, String usuario12, String hash_usuario1, String password_usuario1) {
