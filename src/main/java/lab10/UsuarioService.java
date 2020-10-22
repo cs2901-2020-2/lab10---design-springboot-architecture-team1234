@@ -1,7 +1,5 @@
 package lab10;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +9,12 @@ public class UsuarioService {
     public UsuarioService () {};
 
     public List<Usuario> findAll (){
-        List<Usuario> usuarios = new ArrayList<Usuario>();
+        List<Usuario> usuarios = (List<Usuario>) repository.findAll();
         return usuarios;
     };
 
-    public Usuario find (long codigo) {
-        
+    public Usuario findOne (long codigo) {
+        return repository.findById(codigo);
     };
 
     public Usuario create (Usuario usuario) {

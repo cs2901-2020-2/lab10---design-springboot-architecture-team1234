@@ -10,7 +10,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="lab10---design-springboot-architecture-team1234" target="1.5" />
+      <module name="lab10---design-springboot-architecture-team1234" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="lab10---design-springboot-architecture-team1234" options="-parameters" />
+    </option>
   </component>
 </project>
