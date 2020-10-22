@@ -3,6 +3,7 @@ package lab10;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -92,6 +93,90 @@ public class TestLogin {
 
         List<Usuario> usuariosFinal = usuarioService.findAll();
         Assert.assertEquals(usuarios.size(), 0);
+    }
+
+    @Test
+    public void test_create_delete_specialized() {
+        Usuario usuario1 = new Usuario("email0@gmail.com", "12345678", (long) 12345);
+        Usuario usuario2 = new Usuario("email20@gmail.com", "14785236", (long) 15987);
+        Usuario usuario3 = new Usuario("email30@gmail.com", "85214796", (long) 54555);
+        Usuario usuario4 = new Usuario("email40@gmail.com", "78952312", (long) 98522);
+        Usuario usuario5 = new Usuario("email50@gmail.com", "15947823", (long) 96998);
+        Usuario usuario6 = new Usuario("email60@gmail.com", "84523632", (long) 88548);
+
+        List<Usuario> usuariosComparer = new ArrayList<>();
+        usuariosComparer.add(usuario1);
+        usuariosComparer.add(usuario2);
+        usuariosComparer.add(usuario3);
+        usuariosComparer.add(usuario4);
+        usuariosComparer.add(usuario5);
+        usuariosComparer.add(usuario6);
+
+        UsuarioService usuarioService = new UsuarioService();
+
+        usuarioService.create(usuario1);
+        usuarioService.create(usuario2);
+        usuarioService.create(usuario1);
+        usuarioService.create(usuario3);
+        usuarioService.create(usuario4);
+        usuarioService.create(usuario2);
+        usuarioService.create(usuario5);
+        usuarioService.create(usuario6);
+        usuarioService.create(usuario6);
+        usuarioService.create(usuario2);
+
+        List<Usuario> usuarios = usuarioService.findAll();
+        Assert.assertEquals(usuariosComparer.size(), usuarios.size());
+        Assert.assertEquals(usuariosComparer, usuarios);
+
+        usuarioService.delete(usuario1.codigo);
+        usuariosComparer.remove(usuario1);
+        usuarios = usuarioService.findAll();
+        Assert.assertEquals(usuariosComparer.size(), usuarios.size());
+        Assert.assertEquals(usuariosComparer, usuarios);
+
+        usuarioService.delete(usuario2.codigo);
+        usuarioService.delete(usuario3.codigo);
+        usuariosComparer.remove(usuario2);
+        usuariosComparer.remove(usuario3);
+        usuarios = usuarioService.findAll();
+        Assert.assertEquals(usuariosComparer.size(), usuarios.size());
+        Assert.assertEquals(usuariosComparer, usuarios);
+
+        usuarioService.delete(usuario2.codigo);
+        usuarioService.delete(usuario4.codigo);
+        usuariosComparer.remove(usuario4);
+        usuarios = usuarioService.findAll();
+        Assert.assertEquals(usuariosComparer.size(), usuarios.size());
+
+        usuarioService.delete(usuario2.codigo);
+        usuarioService.delete(usuario3.codigo);
+        usuarios = usuarioService.findAll();
+        Assert.assertEquals(usuariosComparer.size(), usuarios.size());
+        Assert.assertEquals(usuariosComparer, usuarios);
+
+        usuarioService.delete(usuario5.codigo);
+        usuarioService.delete(usuario6.codigo);
+        usuariosComparer.remove(usuario5);
+        usuariosComparer.remove(usuario6);
+        usuarios = usuarioService.findAll();
+        Assert.assertEquals(usuariosComparer.size(), usuarios.size());
+        Assert.assertEquals(usuariosComparer, usuarios);
+
+        usuarioService.delete(usuario1.codigo);
+        usuarioService.delete(usuario6.codigo);
+        usuarios = usuarioService.findAll();
+        Assert.assertEquals(usuariosComparer.size(), usuarios.size());
+        Assert.assertEquals(usuariosComparer, usuarios);
+
+
+        Usuario usuario7 = new Usuario("email80@gmail.com", "15947823", (long) 96778);
+
+        usuarioService.delete(usuario2.codigo);
+        usuarioService.delete(usuario7.codigo);
+        usuarios = usuarioService.findAll();
+        Assert.assertEquals(usuariosComparer.size(), usuarios.size());
+        Assert.assertEquals(usuariosComparer, usuarios);
     }
 
     private void test_update(Usuario usuario1, UsuarioService usuarioService, String usuario12, String hash_usuario1, String password_usuario1) {
