@@ -14,6 +14,16 @@ public class Usuario {
         this.codigo = codigo;
     }
 
+    public Usuario() {
+
+    }
+
+    public void setEmail(String email){this.email = email;}
+
+    public void setDni(String dni){this.dni = dni;}
+
+    public void setCodigo(Long codigo){this.codigo = codigo;}
+
     public void setHash(String hash) {
         this.hash = hash;
     }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 @Test
 public class TestLogin {
     @Test
@@ -48,7 +49,7 @@ public class TestLogin {
     }
 
     @Test
-    public void test_usuario_service_admin() {
+    public void test_usuario_service_admin() throws Exception {
         Usuario usuario1 = new Usuario("email0@gmail.com", "12345678", (long) 12345);
         Usuario usuario2 = new Usuario("email20@gmail.com", "14785236", (long) 15987);
         Usuario usuario3 = new Usuario("email6540@gmail.com", "85214796", (long) 96548);
@@ -95,8 +96,8 @@ public class TestLogin {
         Assert.assertEquals(usuarios.size(), 0);
     }
 
-    @Test
-    public void test_create_delete_specialized() {
+    @Test(expectedExceptions = ConstructorUsuarioServiceException.class)
+    public void test_create_delete_specialized() throws Exception {
         Usuario usuario1 = new Usuario("email0@gmail.com", "12345678", (long) 12345);
         Usuario usuario2 = new Usuario("email20@gmail.com", "14785236", (long) 15987);
         Usuario usuario3 = new Usuario("email30@gmail.com", "85214796", (long) 54555);
@@ -209,5 +210,17 @@ public class TestLogin {
         Assert.assertNotEquals(usuario3.codigo, usuarioC2.codigo);
         Assert.assertEquals(usuario3.codigo, usuarioC3.codigo);
         Assert.assertNotEquals(usuario1.codigo, usuarioC3.codigo);
+    }
+
+    @Test
+    private void testUserByDefault(){
+        Usuario usuarioByDafult = new Usuario();
+        usuarioByDafult.setEmail("user1234@email");
+        usuarioByDafult.setDni("72731229");
+        Long codigoUsuarioByDafult = (long) 20184235;
+        usuarioByDafult.setCodigo(codigoUsuarioByDafult);
+        Assert.assertEquals(usuarioByDafult.codigo,codigoUsuarioByDafult);
+        Assert.assertEquals(usuarioByDafult.dni,"72731229");
+        Assert.assertEquals(usuarioByDafult.email,"user1234@email");
     }
 }

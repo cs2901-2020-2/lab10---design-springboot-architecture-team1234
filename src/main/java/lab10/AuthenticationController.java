@@ -11,28 +11,30 @@ import org.springframework.web.client.RestTemplate;
 public class AuthenticationController {
     private UsuarioService service;
     RestTemplate restTemplate = new RestTemplate();
-    public AuthenticationController() {}
+    public AuthenticationController() throws ConstructorByDefaultAuthenticationControllerException{
+        throw new ConstructorByDefaultAuthenticationControllerException("ERROR CONSTRUCTOR BY DEFAULT IN AUTHENTICATION CONTROLLER");
+    }
 
     @PostMapping
-    public ResponseEntity<?> create(Usuario user) {
+    public ResponseEntity<String> create(Usuario user) {
         ResponseEntity<String> entity = restTemplate.getForEntity ("/users", String.class);
         service.create(user);
         return entity;
     }
 
-    public ResponseEntity<?> read(Long codigo){
+    public ResponseEntity<String> read(Long codigo){
         ResponseEntity<String> entity = restTemplate.getForEntity("/users", String.class);
         service.findOne(codigo);
         return entity;
     }
 
-    public ResponseEntity<?> update(Long codigo, Usuario user){
+    public ResponseEntity<String> update(Long codigo, Usuario user){
         ResponseEntity<String> entity = restTemplate.getForEntity("/users", String.class);
         service.update(user);
         return entity;
     }
 
-    public ResponseEntity<?> delete(Long codigo){
+    public ResponseEntity<String> delete(Long codigo){
         ResponseEntity<String> entity = restTemplate.getForEntity("/users", String.class);
         service.delete(codigo);
         return entity;
