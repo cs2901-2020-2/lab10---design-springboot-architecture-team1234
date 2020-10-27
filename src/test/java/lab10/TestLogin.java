@@ -1,5 +1,6 @@
 package lab10;
 
+import org.springframework.http.ResponseEntity;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -48,7 +49,7 @@ public class TestLogin {
         Assert.assertEquals(usuario1.nombreCompleto, "NombreCompleto");
     }
 
-    @Test
+    @Test(expectedExceptions = ConstructorUsuarioServiceException.class)
     public void test_usuario_service_admin() throws Exception {
         Usuario usuario1 = new Usuario("email0@gmail.com", "12345678", (long) 12345);
         Usuario usuario2 = new Usuario("email20@gmail.com", "14785236", (long) 15987);
@@ -223,4 +224,17 @@ public class TestLogin {
         Assert.assertEquals(usuarioByDafult.dni,"72731229");
         Assert.assertEquals(usuarioByDafult.email,"user1234@email");
     }
+
+    @Test(expectedExceptions = ConstructorByDefaultAuthenticationControllerException.class)
+    private void testAuthenticationControllerReadAll() throws ConstructorByDefaultAuthenticationControllerException {
+        AuthenticationController authenticationController = new AuthenticationController();
+        Usuario usuarioOne = new Usuario("email01@gmail.com", "12345678", (long) 12345);
+        Usuario usuarioTwo = new Usuario("email02@gmail.com", "14785236", (long) 15987);
+        Usuario usuarioThree = new Usuario("email03@gmail.com", "85214796", (long) 54555);
+        authenticationController.create(usuarioOne);
+        authenticationController.create(usuarioTwo);
+        authenticationController.create(usuarioThree);
+        Assert.assertEquals(usuarioOne.codigo,authenticationController.read((long) 12345));
+    }
+
 }

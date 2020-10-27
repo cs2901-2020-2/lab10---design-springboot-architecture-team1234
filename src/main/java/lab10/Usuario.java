@@ -3,9 +3,19 @@ package lab10;
 import java.util.Date;
 
 public class Usuario {
-    String hash, primerNombre, apellidoPaterno, apellidoMaterno, email, nombre, passwd, segundoNombre, dni, nombreCompleto;
+    String hash;
+    String primerNombre;
+    String apellidoPaterno;
+    String apellidoMaterno;
+    String email;
+    String nombre;
+    String passwd;
+    String segundoNombre;
+    String dni;
+    String nombreCompleto;
     Long codigo;
-    Integer sexo, vigencia;
+    Integer sexo;
+    Integer vigencia;
     Date fechaCese;
 
     public Usuario(String email, String dni, Long codigo) {
